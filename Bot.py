@@ -1,8 +1,10 @@
 #Импорт модулей
 import telebot
+import os
 
 #Связь с токеном и создание бота
-bot = telebot.TeleBot("950234764:AAF8m_8vpMothwPryFNhbFka1F8s-MHTpE0")
+token = os.environ.get("TOKEN")
+bot = telebot.TeleBot(token)
 
 #/start
 @bot.message_handler(commands=["start"])
