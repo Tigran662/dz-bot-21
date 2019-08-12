@@ -14,7 +14,11 @@ def start_message(message):
 #/idea
 @bot.message_handler(commands=["idea"])
 def idea_message(message):
-    bot.send_message(message.chat.id, message.chat.id)
+    text1 = message.text[5::]
+    if text1 == '':
+        bot.send_message(message.chat.id, "Вы не ввели идею!")
+    else:
+        bot.send_message("522487188", text1)
 
 #Работа бота
 bot.polling()
