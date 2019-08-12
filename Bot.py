@@ -10,6 +10,11 @@ bot = telebot.TeleBot(token)
 @bot.message_handler(commands=["start"])
 def start_message(message):
     bot.send_message(message.chat.id, "Я в работе!")
+    
+#/idea
+@bot.message_handler(commands=["idea"])
+def idea_message(message):
+    bot.send_message(message.chat.id, message.chat.id)
 
 #Работа бота
 bot.polling()
