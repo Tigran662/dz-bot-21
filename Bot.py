@@ -33,6 +33,7 @@ def new_dz_message(message):
         text = message.text[19::]
         if date != '' and text != '':
             all.update({date:text})
+            bot.send_message(message.chat.id, "Дз добавлено!\n" + "Дата: " + date + "\nСодержание: " + text)
         else:
             bot.send_message(message.chat.id, "Ошибка!")
 
@@ -40,60 +41,41 @@ def new_dz_message(message):
 @bot.message_handler(commands=["dz"])
 def dz_message(message):
     global all
-    bot.send_message(message.chat.id, all)
+    if len(all.keys()) != 0:
+        s = ''
+        for key, val in all.items():
+            s += key + "\n" + val + "\n\n"
+        bot.send_message(message.chat.id, s)
+    else:
+        bot.send_message(message.chat.id, "Нет дз)")
 
 #dzs
 @bot.message_handler(commands=["dzs"])
 def dzs_message(message):
     date = message.text[5::]
     if date != '':
-        f = open("dz.txt", "r")
-        a = f.read()
-        f.close()
-        b = []
-        a = a.split("\n")
-        for i in range(len(a)):
-            if a[i] != "":
-                b.append(a[i].split(";"))
-        for i in b:
-            if i[0] == date:
-                s = ''
-                for j in i:
-                    s += j + "\n"
-                bot.send_message(message.chat.id, s)
-                break
+        global all
+        if date in all.keys():
+            bot.send_message(message.chat.id, all.get(date))
         else:
-            bot.send_message(message.chat.id, "Даты не существует!")
+            bot.send_message(message.chat.id, "Даты не существует.")
     else:
         bot.send_message(message.chat.id, "Ошибка")
 
 #delete_dz
 @bot.message_handler(commands=["delete_dz"])
 def delete_dz_message(message):
+    global all
     if message.from_user.id != 522487188:
         bot.send_message(message.chat.id, "У вас нет прав.")
     else:
         date = message.text[11::]
         if date != '':
-            f = open("dz.txt", "r")
-            a = f.read()
-            f.close()
-            b = []
-            a = a.split("\n")
-            for i in range(len(a)):
-                if a[i] != "":
-                    b.append(a[i].split(";"))
-            for i in range(len(b)):
-                if b[i][0] == date:
-                    b.remove(b[i])
-                    f = open("dz.txt", "w")
-                    for i in b:
-                        f.write(";".join(i)+"\n")
-                    f.close()
-                    bot.send_message(message.chat.id, date + " осталось без дз(")
-                    break
+            if date in all.keys():
+                all.pop(date)
+                bot.send_message(message.chat.id, date + " осталось без дз(")
             else:
-                bot.send_message(message.chat.id, "Такой даты не существует!")
+                bot.send_message(message.chat.id, "Даты не существует.")
         else:
             bot.send_message(message.chat.id, "Ошибка")
 
