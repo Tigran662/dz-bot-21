@@ -6,6 +6,8 @@ import os
 token = os.environ.get("TOKEN")
 bot = telebot.TeleBot(token)
 
+all = {}
+
 #/idea
 @bot.message_handler(commands=["idea"])
 def idea_message(message):
@@ -30,45 +32,15 @@ def new_dz_message(message):
         date = message.text[8:18]
         text = message.text[19::]
         if date != '' and text != '':
-            f = open("dz.txt", "r")
-            a = f.read()
-            f.close()
-            b = []
-            a = a.split("\n")
-            for i in range(len(a)):
-                if a[i] != "":
-                    b.append(a[i].split(";"))
-            for i in b:
-                if i[0] == date:
-                    i.append(text)
-                    break
-            else:
-                b.append([date, text])
-            f = open("dz.txt", "w")
-            for i in b:
-                f.write(";".join(i)+"\n")
-            f.close()
-            bot.send_message(message.chat.id, "Дз добавлено!\n" + "Число: " + date + "\nСодержание: " + text)
+            all.update({date:text})
         else:
             bot.send_message(message.chat.id, "Ошибка!")
 
 #dz
 @bot.message_handler(commands=["dz"])
 def dz_message(message):
-    f = open("dz.txt", "r")
-    a = f.read()
-    f.close()
-    b = []
-    a = a.split("\n")
-    for i in range(len(a)):
-        if a[i] != "":
-            b.append(a[i].split(";"))
-    s = ""
-    for i in b:
-        for j in i:
-            s += j + "\n"
-        s += "\n"
-    bot.send_message(message.chat.id, s)
+    global all
+    bot.send_message(message.chat.id, all)
 
 #dzs
 @bot.message_handler(commands=["dzs"])
