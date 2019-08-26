@@ -28,8 +28,12 @@ def idea_message(message):
 #/help
 @bot.message_handler(commands=["help"])
 def help_message(message):
-    bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
-    bot.forward_message("-326941525", message.chat.id, message.message_id)
+    for admin in bot.get_chat_administrators(message.chat.id):
+        if "815442417" in str(admin):
+            bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
+            bot.forward_message("-326941525", message.chat.id, message.message_id)
+    else:
+        bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     
 #new_dz
 @bot.message_handler(commands=["new_dz"])
