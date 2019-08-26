@@ -16,7 +16,7 @@ all = {}
 def idea_message(message):
     text1 = message.text[5::]
     if text1 == '':
-        bot.send_message(message.chat.id, "Вы не ввели идею!")
+        bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
     else:
         bot.send_message("522487188", "Идея от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nИдея:" + text1)
         bot.send_message(message.chat.id, "Идея отправлена разработчику.")
@@ -24,7 +24,7 @@ def idea_message(message):
 #/help
 @bot.message_handler(commands=["help"])
 def help_message(message):
-    bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату")
+    bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
 
 #new_dz
 @bot.message_handler(commands=["new_dz"])
@@ -38,7 +38,7 @@ def new_dz_message(message):
             all.update({date:text})
             bot.send_message(message.chat.id, "Дз добавлено!\n" + "Дата: " + date + "\nСодержание: " + text)
         else:
-            bot.send_message(message.chat.id, "Ошибка!")
+            bot.send_message(message.chat.id, "Возникла ошибка.\nВозможные причины: Отсутствует дата или текст.")
 
 #dz
 @bot.message_handler(commands=["dz"])
@@ -50,7 +50,7 @@ def dz_message(message):
             s += key + "\n" + val + "\n\n"
         bot.send_message(message.chat.id, s)
     else:
-        bot.send_message(message.chat.id, "Нет дз)")
+        bot.send_message(message.chat.id, "Пусто.")
 
 #dzs
 @bot.message_handler(commands=["dzs"])
@@ -63,7 +63,7 @@ def dzs_message(message):
         else:
             bot.send_message(message.chat.id, "Даты не существует.")
     else:
-        bot.send_message(message.chat.id, "Ошибка")
+        bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
 
 #delete_dz
 @bot.message_handler(commands=["delete_dz"])
