@@ -23,6 +23,7 @@ def idea_message(message):
                 else:
                     bot.send_message("522487188", "Идея от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nИдея:" + text1)
                     bot.send_message(message.chat.id, "Идея отправлена разработчику.")
+                break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
@@ -78,6 +79,7 @@ def dz_message(message):
                     bot.send_message(message.chat.id, s)
                 else:
                     bot.send_message(message.chat.id, "Пусто.")
+                break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
@@ -105,6 +107,7 @@ def dzs_message(message):
                         bot.send_message(message.chat.id, "Даты не существует.")
                 else:
                     bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
+                break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
@@ -156,6 +159,7 @@ def time_message(message):
                     d += c // 24
                     c -= c // 24 * 24
                 bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
+                break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
