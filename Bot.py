@@ -65,19 +65,29 @@ def new_dz_message(message):
 #dz
 @bot.message_handler(commands=["dz"])
 def dz_message(message):
-    for admin in bot.get_chat_administrators(message.chat.id):
-        if "815442417" in str(admin):
-            global all
-            if len(all.keys()) != 0:
-                s = ''
-                for key, val in all.items():
-                    s += key + "\n" + val + "\n\n"
-                bot.send_message(message.chat.id, s)
-            else:
-                bot.send_message(message.chat.id, "Пусто.")
-            bot.forward_message("-326941525", message.chat.id, message.message_id)
+    if message.chat.type == "group":
+        for admin in bot.get_chat_administrators(message.chat.id):
+            if "815442417" in str(admin):
+                global all
+                if len(all.keys()) != 0:
+                    s = ''
+                    for key, val in all.items():
+                        s += key + "\n" + val + "\n\n"
+                    bot.send_message(message.chat.id, s)
+                else:
+                    bot.send_message(message.chat.id, "Пусто.")
+        else:
+            bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
-        bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+        global all
+        if len(all.keys()) != 0:
+            s = ''
+            for key, val in all.items():
+                s += key + "\n" + val + "\n\n"
+            bot.send_message(message.chat.id, s)
+        else:
+            bot.send_message(message.chat.id, "Пусто.")
+    bot.forward_message("-326941525", message.chat.id, message.message_id)
     
 #dzs
 @bot.message_handler(commands=["dzs"])
