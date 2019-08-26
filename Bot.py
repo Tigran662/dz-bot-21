@@ -16,7 +16,7 @@ all = {}
 def idea_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
-            if "815442417" in str(admin):
+            if "950234764" in str(admin):
                 text1 = message.text[5::]
                 if text1 == '':
                     bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
@@ -39,7 +39,7 @@ def idea_message(message):
 def help_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
-            if "815442417" in str(admin):
+            if "950234764" in str(admin):
                 bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
                 break
         else:
@@ -70,7 +70,7 @@ def dz_message(message):
     global all
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
-            if "815442417" in str(admin):
+            if "950234764" in str(admin):
                 if len(all.keys()) != 0:
                     s = ''
                     for key, val in all.items():
@@ -96,7 +96,7 @@ def dzs_message(message):
     global all
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
-            if "815442417" in str(admin):
+            if "950234764" in str(admin):
                 date = message.text[5::]
                 if date != '':
                     if date in all.keys():
@@ -143,7 +143,7 @@ def time_message(message):
     global start_time
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
-            if "815442417" in str(admin):
+            if "950234764" in str(admin):
                 a = int(time.time() - start_time)
                 b,c,d = 0,0,0
                 if a >= 60:
