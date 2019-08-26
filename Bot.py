@@ -1,5 +1,6 @@
 #Импорт модулей
 import telebot
+import time
 import os
 
 #Связь с токеном и создание бота
