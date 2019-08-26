@@ -14,13 +14,17 @@ all = {}
 #/idea
 @bot.message_handler(commands=["idea"])
 def idea_message(message):
-    text1 = message.text[5::]
-    if text1 == '':
-        bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
+    for admin in bot.get_chat_administrators(message.chat.id):
+        if "815442417" in str(admin):
+            text1 = message.text[5::]
+            if text1 == '':
+                bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
+            else:
+                bot.send_message("522487188", "Идея от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nИдея:" + text1)
+                bot.send_message(message.chat.id, "Идея отправлена разработчику.")
     else:
-        bot.send_message("522487188", "Идея от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nИдея:" + text1)
-        bot.send_message(message.chat.id, "Идея отправлена разработчику.")
-
+        bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+    
 #/help
 @bot.message_handler(commands=["help"])
 def help_message(message):
