@@ -88,14 +88,14 @@ def time_message(message):
     a = int(time.time() - start_time)
     b,c,d = 0,0,0
     if a >= 60:
-        b += 1
-        a -= 60
+        b += a // 60
+        a -= a // 60 * 60
     if b >= 60:
-        c += 1
-        b -= 60
+        c += b // 60
+        b -= b // 60 * 60
     if c >= 24:
-        d += 1
-        c -= 24
+        d += c // 24
+        c -= c // 24 * 24
     bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
 
 #Работа бота
