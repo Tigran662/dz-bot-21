@@ -52,6 +52,7 @@ def dz_message(message):
         bot.send_message(message.chat.id, s)
     else:
         bot.send_message(message.chat.id, "Пусто.")
+    bot.send_message("-363200275", "Имя: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСодержание: " + message.text)
 
 #dzs
 @bot.message_handler(commands=["dzs"])
@@ -65,6 +66,7 @@ def dzs_message(message):
             bot.send_message(message.chat.id, "Даты не существует.")
     else:
         bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
+    bot.send_message("-363200275", "Имя: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСодержание: " + message.text)
 
 #delete_dz
 @bot.message_handler(commands=["delete_dz"])
@@ -98,6 +100,7 @@ def time_message(message):
         d += c // 24
         c -= c // 24 * 24
     bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
+    bot.send_message("-363200275", "Имя: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСодержание: " + message.text)
 
-#Работа бота
+    #Работа бота
 bot.polling()
