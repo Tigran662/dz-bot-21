@@ -83,6 +83,7 @@ def delete_dz_message(message):
 #time
 @bot.message_handler(commands=["time"])
 def time_message(message):
+    bot.send_message(message.chat.id, str(start_time))
     a = int(time.time() - start_time)
     b,c,d = 0,0,0
     if a >= 60:
