@@ -69,16 +69,20 @@ def dz_message(message):
 #dzs
 @bot.message_handler(commands=["dzs"])
 def dzs_message(message):
-    date = message.text[5::]
-    if date != '':
-        global all
-        if date in all.keys():
-            bot.send_message(message.chat.id, all.get(date))
-        else:
-            bot.send_message(message.chat.id, "Даты не существует.")
+    for admin in bot.get_chat_administrators(message.chat.id):
+        if "815442417" in str(admin):
+            date = message.text[5::]
+            if date != '':
+                global all
+                if date in all.keys():
+                    bot.send_message(message.chat.id, all.get(date))
+                else:
+                    bot.send_message(message.chat.id, "Даты не существует.")
+            else:
+                bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
+            bot.forward_message("-326941525", message.chat.id, message.message_id)
     else:
-        bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
-    bot.forward_message("-326941525", message.chat.id, message.message_id)
+        bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
 
 #delete_dz
 @bot.message_handler(commands=["delete_dz"])
