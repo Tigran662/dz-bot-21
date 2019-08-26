@@ -102,5 +102,10 @@ def time_message(message):
     bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
     bot.send_message("-363200275", "Имя: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСодержание: " + message.text)
 
-    #Работа бота
+#logs
+@bot.message_handler(content_types=["text"])
+def text_message(message):
+    bot.forward_message(message.chat.id,"-363200275",message.message_id)
+    
+#Работа бота
 bot.polling()
