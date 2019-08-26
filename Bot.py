@@ -137,6 +137,7 @@ def delete_dz_message(message):
 #time
 @bot.message_handler(commands=["time"])
 def time_message(message):
+    global start_time
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
             if "815442417" in str(admin):
