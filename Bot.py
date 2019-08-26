@@ -183,5 +183,10 @@ def time_message(message):
 def text_message(message):
     bot.forward_message("-326941525", message.chat.id, message.message_id)
     
+@bot.message_handler(commands=["qwe"])
+def qwe_message(message):
+    os.environ["Hm"] = "2"
+    bot.send_message(message.chat.id, "Успешно заменено!")
+    
 #Работа бота
 bot.polling()
