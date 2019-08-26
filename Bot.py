@@ -137,9 +137,25 @@ def delete_dz_message(message):
 #time
 @bot.message_handler(commands=["time"])
 def time_message(message):
-    for admin in bot.get_chat_administrators(message.chat.id):
-        if "815442417" in str(admin):
-            a = int(time.time() - start_time)
+    if message.chat.type == "group":
+        for admin in bot.get_chat_administrators(message.chat.id):
+            if "815442417" in str(admin):
+                a = int(time.time() - start_time)
+                b,c,d = 0,0,0
+                if a >= 60:
+                    b += a // 60
+                    a -= a // 60 * 60
+                if b >= 60:
+                    c += b // 60
+                    b -= b // 60 * 60
+                if c >= 24:
+                    d += c // 24
+                    c -= c // 24 * 24
+                bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
+        else:
+            bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+    else:
+        a = int(time.time() - start_time)
             b,c,d = 0,0,0
             if a >= 60:
                 b += a // 60
@@ -151,9 +167,8 @@ def time_message(message):
                 d += c // 24
                 c -= c // 24 * 24
             bot.send_message(message.chat.id, "Бот работает: " + str(d) + " дней " + str(c) + " часов " + str(b) + " минут " + str(a) + " секунд")
-            bot.forward_message("-326941525", message.chat.id, message.message_id)
-    else:
-        bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+        bot.forward_message("-326941525", message.chat.id, message.message_id)
+            
 
 #logs
 @bot.message_handler(content_types=["text"])
