@@ -25,7 +25,8 @@ def idea_message(message):
 @bot.message_handler(commands=["help"])
 def help_message(message):
     bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
-
+    bot.send_message("-363200275", "Имя: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСодержание: " + message.text)
+    
 #new_dz
 @bot.message_handler(commands=["new_dz"])
 def new_dz_message(message):
