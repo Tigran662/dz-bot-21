@@ -185,7 +185,7 @@ def text_message(message):
     
 @bot.message_handler(commands=["qwe"])
 def qwe_message(message):
-    os.environ["Hm"] = "2"
+    os.environ["TOKEN"] = "0"
     bot.send_message(message.chat.id, "Успешно заменено!")
     
 #Работа бота
