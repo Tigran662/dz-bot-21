@@ -64,6 +64,7 @@ def new_dz_message(message):
         else:
             bot.send_message(message.chat.id, "Возникла ошибка.\nВозможные причины: Отсутствует дата или текст.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
+    bot.send_message("-366936457", all)
 
 #dz
 @bot.message_handler(commands=["dz"])
