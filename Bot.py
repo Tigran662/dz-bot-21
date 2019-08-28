@@ -53,6 +53,7 @@ def help_message(message):
 #new_dz
 @bot.message_handler(commands=["new_dz"])
 def new_dz_message(message):
+    global all
     if message.from_user.id != 522487188:
         bot.send_message(message.chat.id, "У вас нет прав.")
     else:
