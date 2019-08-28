@@ -65,7 +65,7 @@ def new_dz_message(message):
         else:
             bot.send_message(message.chat.id, "Возникла ошибка.\nВозможные причины: Отсутствует дата или текст.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
-    bot.send_message("-366936457", str(all))
+    bot.send_message("-366936457", "Дз обновилось!\n" + str(all))
 
 #dz
 @bot.message_handler(commands=["dz"])
@@ -141,7 +141,7 @@ def delete_dz_message(message):
         else:
             bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
-    bot.send_message("-366936457", str(all))
+    bot.send_message("-366936457", "Дз обновилось!\n" + str(all))
             
 #time
 @bot.message_handler(commands=["time"])
