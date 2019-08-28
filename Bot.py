@@ -10,6 +10,7 @@ bot = telebot.TeleBot(token)
 start_time = time.time()
 
 all = {}
+temp_new_del_dz = 0
 
 #/idea
 @bot.message_handler(commands=["idea"])
@@ -54,6 +55,7 @@ def help_message(message):
 @bot.message_handler(commands=["new_dz"])
 def new_dz_message(message):
     global all
+    global temp_new_del_dz
     if message.from_user.id != 522487188:
         bot.send_message(message.chat.id, "У вас нет прав.")
     else:
@@ -66,6 +68,9 @@ def new_dz_message(message):
             bot.send_message(message.chat.id, "Возникла ошибка.\nВозможные причины: Отсутствует дата или текст.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
     bot.send_message("-366936457", "Дз обновилось!\n" + str(all))
+    temp_new_del_dz = message.message_id
+    if temp_new_del_dz != 0:
+        bot.delete_message(message.chat.id, temp_new_del_dz)
 
 #dz
 @bot.message_handler(commands=["dz"])
@@ -128,6 +133,7 @@ def dzs_message(message):
 @bot.message_handler(commands=["delete_dz"])
 def delete_dz_message(message):
     global all
+    global temp_new_del_dz
     if message.from_user.id != 522487188:
         bot.send_message(message.chat.id, "У вас нет прав.")
     else:
@@ -142,6 +148,9 @@ def delete_dz_message(message):
             bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
     bot.send_message("-366936457", "Дз обновилось!\n" + str(all))
+    temp_new_del_dz = message.message_id
+    if temp_new_del_dz != 0:
+        bot.delete_message(message.chat.id, temp_new_del_dz)
             
 #time
 @bot.message_handler(commands=["time"])
