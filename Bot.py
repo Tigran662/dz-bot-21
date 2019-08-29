@@ -60,6 +60,7 @@ def help_developers_message(message):
                     break
                 else:
                     bot.send_message(message.chat.id, "У вас нет прав.")
+                    break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
