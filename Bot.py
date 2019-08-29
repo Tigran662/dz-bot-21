@@ -50,6 +50,7 @@ def help_message(message):
     bot.forward_message("-326941525", message.chat.id, message.message_id)
     
 #/help_developers
+@bot.message_handler(commands=["help_developers"])
 def help_developers_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
