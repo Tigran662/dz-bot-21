@@ -9,7 +9,7 @@ bot = telebot.TeleBot(token)
 
 start_time = time.time()
 
-all = {}
+all = os.environ.get(bd)
 
 #/idea
 @bot.message_handler(commands=["idea"])
