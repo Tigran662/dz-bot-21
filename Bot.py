@@ -41,13 +41,31 @@ def help_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
             if "950234764" in str(admin):
-                bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
+                bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/help_developers - команды для проверенных людей")
                 break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
-        bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота")
+        bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/help_developers - команды для проверенных людей")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
+    
+#/help_developers
+def help_developers_message(message):
+    if message.chat.type == "group":
+        for admin in bot.get_chat_administrators(message.chat.id):
+            if "950234764" in str(admin):
+                if message.from_user.id == 522487188:
+                    bot.send_message(message.chat.id, "/new_dz дата текст - создать новое дз\n/delete_dz дата - удалить дз на определённую дату")
+                    break
+        else:
+            bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+    else:
+        if message.from_user.id == 522487188:
+            bot.send_message(message.chat.id, "/new_dz дата текст - создать новое дз\n/delete_dz дата - удалить дз на определённую дату")
+        else:
+            bot.send_message(message.chat.id, "У вас нет прав.")
+    bot.forward_message("-326941525", message.chat.id, message.message_id)
+    
             
     
 #new_dz
