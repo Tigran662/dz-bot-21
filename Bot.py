@@ -58,6 +58,8 @@ def help_developers_message(message):
                 if message.from_user.id == 522487188:
                     bot.send_message(message.chat.id, "/new_dz дата текст - создать новое дз\n/delete_dz дата - удалить дз на определённую дату")
                     break
+                else:
+                    bot.send_message(message.chat.id, "У вас нет прав.")
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
