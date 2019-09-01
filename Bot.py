@@ -10,7 +10,11 @@ bot = telebot.TeleBot(token)
 start_time = time.time()
 
 all = {}
-rasps = {"Понедельник":"1. ?\n2. ?\n3. ?\n4. ?"}
+rasps = {"Понедельник":"1. ?\n2. ?\n3. ?\n4. ?", \
+"Вторник":"1. ?\n2. ?\n3. ?\n4. ?", \
+"Среда":"1. ?\n2. ?\n3. ?\n4. ?", \
+"Четверг":"1. ?\n2. ?\n3. ?\n4. ?", \
+"Пятница":"1. ?\n2. ?\n3. ?\n4. ?"}
 
 #/idea
 @bot.message_handler(commands=["idea"])
@@ -35,6 +39,30 @@ def idea_message(message):
             bot.send_message("522487188", "Идея от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nИдея:" + text1)
             bot.send_message(message.chat.id, "Идея отправлена разработчику.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
+
+#/bug
+@bot.message_handler(commands=["bug"])
+def bug_message(message):
+    if message.chat.type == "group":
+        for admin in bot.get_chat_administrators(message.chat.id):
+            if "950234764" in str(admin):
+                text1 = message.text[4::]
+                if text1 == '':
+                    bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
+                else:
+                    bot.send_message("522487188", "Ошибка от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСуть ошибки:" + text1)
+                    bot.send_message(message.chat.id, "Теперь разработчик в курсе этой проблемы.")
+                break
+        else:
+            bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+    else:
+        text1 = message.text[5::]
+        if text1 == '':
+            bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует текст.")
+        else:
+            bot.send_message("522487188", "Ошибка от: " + message.from_user.first_name + "\nid: " + str(message.from_user.id) + "\nСуть ошибки:" + text1)
+            bot.send_message(message.chat.id, "Теперь разработчик в курсе этой проблемы.")
+    bot.forward_message("-326941525", message.chat.id, message.message_id)
     
 #/help
 @bot.message_handler(commands=["help"])
@@ -42,12 +70,12 @@ def help_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
             if "950234764" in str(admin):
-                bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/help_developers - команды для проверенных людей")
+                bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/bug - сообщить об ошибке\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/rasp - показать расписание на неделю\n/help_developers - команды для проверенных людей")
                 break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
     else:
-        bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/help_developers - команды для проверенных людей")
+        bot.send_message(message.chat.id, "/idea текст - предложить свою идею по улучшению бота\n/bug - сообщить об ошибке\n/dz - узнать абсолютно всё дз на данный момент\n/dzs дата - узнать дз на указанную дату\n/time - показать время работы бота\n/rasp - показать расписание на неделю\n/help_developers - команды для проверенных людей")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
     
 #/help_developers
@@ -124,19 +152,19 @@ def rasp_message(message):
     if message.chat.type == "group":
         for admin in bot.get_chat_administrators(message.chat.id):
                 if "950234764" in str(admin):
-                s = ''
-                for key, val in rasps.items():
-                    s += key + "\n" + val + "\n"
-                bot.send_message(message.chat.id, s)
-                break
+                    s = ''
+                    for key, val in rasps.items():
+                        s += key + "\n" + val + "\n\n"
+                    bot.send_message(message.chat.id, s)
+                    break
         else:
             bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
-     else:
-         s = ''
-         for key, val in rasps.items():
-             s += key + "\n" + val + "\n"
-         bot.send_message(message.chat.id, s)
-     bot.forward_message("-326941525", message.chat.id, message.message_id)
+    else:
+        s = ''
+        for key, val in rasps.items():
+            s += key + "\n" + val + "\n\n"
+        bot.send_message(message.chat.id, s)
+    bot.forward_message("-326941525", message.chat.id, message.message_id)
          
 #dzs
 @bot.message_handler(commands=["dzs"])
@@ -150,7 +178,7 @@ def dzs_message(message):
                     if date in all.keys():
                         bot.send_message(message.chat.id, all.get(date))
                     else:
-                        bot.send_message(message.chat.id, "Даты не существует.")
+                        bot.send_message(message.chat.id, "Ошибка в дате.")
                 else:
                     bot.send_message(message.chat.id, "Возникла ошибка.\nВозможная причина: Отсутствует дата.")
                 break
