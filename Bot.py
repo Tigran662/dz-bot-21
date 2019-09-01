@@ -10,7 +10,7 @@ bot = telebot.TeleBot(token)
 start_time = time.time()
 
 all = {}
-rasps = {"Понедельник":"1. ?\n2. ?\n3. ?\n4. ?}
+rasps = {"Понедельник":"1. ?\n2. ?\n3. ?\n4. ?"}
 
 #/idea
 @bot.message_handler(commands=["idea"])
