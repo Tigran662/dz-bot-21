@@ -10,6 +10,7 @@ bot = telebot.TeleBot(token)
 start_time = time.time()
 
 all = {}
+rasps = {"Понедельник":"1. ?\n2. ?\n3. ?\n4. ?}
 
 #/idea
 @bot.message_handler(commands=["idea"])
@@ -115,7 +116,28 @@ def dz_message(message):
         else:
             bot.send_message(message.chat.id, "Пусто.")
     bot.forward_message("-326941525", message.chat.id, message.message_id)
-    
+   
+#rasp
+@bot.message_handler(commands=["rasp"])
+def rasp_message(message):
+    global rasps
+    if message.chat.type == "group":
+        for admin in bot.get_chat_administrators(message.chat.id):
+                if "950234764" in str(admin):
+                s = ''
+                for key, val in rasps.items():
+                    s += key + "\n" + val + "\n"
+                bot.send_message(message.chat.id, s)
+                break
+        else:
+            bot.send_message(message.chat.id, "Мне нужны права администратора для этого действия.")
+     else:
+         s = ''
+         for key, val in rasps.items():
+             s += key + "\n" + val + "\n"
+         bot.send_message(message.chat.id, s)
+     bot.forward_message("-326941525", message.chat.id, message.message_id)
+         
 #dzs
 @bot.message_handler(commands=["dzs"])
 def dzs_message(message):
