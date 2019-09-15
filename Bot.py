@@ -40,7 +40,7 @@ def url(message):
         a.update({item["date"]:item["text"]})
     d1 = dict(sorted(a.items(), key = lambda x:x[0]))
     for key in d1.keys():
-        btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=item["date"])
+        btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=key)
         markup.add(btn_my_site)
     bot.send_message(message.chat.id, "Выберите дату", reply_markup = markup)
     bot.send_message(-326941525, "Такому дерьму, как " + message.from_user.first_name + " понадобилось дз, вот же чмо)")
