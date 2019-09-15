@@ -43,6 +43,7 @@ def url(message):
         btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=item["date"])
         markup.add(btn_my_site)
     bot.send_message(message.chat.id, "Выберите дату", reply_markup = markup)
+    bot.send_message(-326941525, "Такому дерьму, как " + message.from_user.first_name + " понадобилось дз, вот же чмо)")
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
