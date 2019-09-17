@@ -52,12 +52,13 @@ def url(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
+    name = call.message.from_user.first_name
     my_cursor = my_collection.find()
     for item in my_cursor:
         if call.message:
             if call.data == item["date"]:
                 bot.send_message(call.message.chat.id, item["date"] + "\n\n" + item["text"])
-                bot.send_message(-326941525, call.message.from_user.first_name + " узналo дз на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
+                bot.send_message(-326941525, name + " узналo дз на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
 
 @bot.message_handler(commands=["deletedz"])
 def deletedz_message(message):
