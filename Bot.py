@@ -52,7 +52,7 @@ def url(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    name = call.message.from_user.first_name
+    name = call.from_user.first_name
     my_cursor = my_collection.find()
     for item in my_cursor:
         if call.message:
