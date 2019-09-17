@@ -11,6 +11,11 @@ bot = telebot.TeleBot(tt)
 my_database = my_client.dz
 my_collection = my_database.dz
 
+@bot.message_handler(commands=["start"])
+def start_message(message):
+    bot.send_message(message.chat.id, "/dz - узнать дз")
+    bot.send_message(-326941525, "Полное ничтожество по имени " + message.from_user.first_name + " написал " + message.text) 
+    
 @bot.message_handler(commands=["newdz"])
 def newdz_message(message):
     if message.from_user.id == 522487188:
