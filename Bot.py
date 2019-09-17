@@ -57,7 +57,7 @@ def callback_inline(call):
         if call.message:
             if call.data == item["date"]:
                 bot.send_message(call.message.chat.id, item["date"] + "\n\n" + item["text"])
-                bot.send_message(-326941525, message.from_user.first_name + " узнала дз на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
+                bot.send_message(-326941525, call.message.from_user.first_name + " узналo дз на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
 
 @bot.message_handler(commands=["deletedz"])
 def deletedz_message(message):
