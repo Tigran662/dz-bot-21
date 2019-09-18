@@ -11,6 +11,9 @@ bot = telebot.TeleBot(tt)
 my_database = my_client.dz
 my_collection = my_database.dz
 
+my_database2 = my_client.rasp
+my_collection2 = my_database2.rasp
+
 @bot.message_handler(commands=["start"])
 def start_message(message):
     bot.send_message(message.chat.id, "/dz - узнать дз")
@@ -59,7 +62,12 @@ def callback_inline(call):
             if call.data == item["date"]:
                 bot.send_message(call.message.chat.id, item["date"] + "\n\n" + item["text"])
                 bot.send_message(-326941525, name + " узналo дз на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
-
+    my_cursor = my_collection2.find()
+    for item in my_cursor:
+        if call.message:
+            if call.data == item["idch"]:
+                bot.send_message(call.message.chat.id, "• " + item["ch"] + "\n\n" + item["rasp"])
+                bot.send_message(-326941525, name + " узналo расписание на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
 @bot.message_handler(commands=["deletedz"])
 def deletedz_message(message):
     if message.from_user.id == 522487188:
@@ -79,6 +87,21 @@ def deletedz_message(message):
 def send1_message(message):
     if message.from_user.id == 522487188:
         bot.send_message(-1001219015757, message.text[6::])
+        
+@bot.message_handler(commands=["rasp"])
+def rasp_message(message):
+    markup2 = types.InlineKeyboardMarkup()
+    btn_my_site=types.InlineKeyboardButton(text="Понедельник",callback_data="Mon")
+    markup2.add(btn_my_site)
+    btn_my_site=types.InlineKeyboardButton(text="Вторник",callback_data="Tue")
+    markup2.add(btn_my_site)
+    btn_my_site=types.InlineKeyboardButton(text="Среда",callback_data="Wed")
+    markup2.add(btn_my_site)
+    btn_my_site=types.InlineKeyboardButton(text="Четверг",callback_data="Thu")
+    markup2.add(btn_my_site)
+    btn_my_site=types.InlineKeyboardButton(text="Пятница",callback_data="Fri")
+    markup2.add(btn_my_site)
+    bot.send_message(message.chat.id, "Выберите день недели", reply_markup = markup2)
 
 @bot.message_handler(content_types=["text"])
 def text_message(message):
