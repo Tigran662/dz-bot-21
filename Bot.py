@@ -68,6 +68,7 @@ def callback_inline(call):
             if call.data == item["idch"]:
                 bot.send_message(call.message.chat.id, "• " + item["ch"] + "\n\n" + item["rasp"])
                 bot.send_message(-326941525, name + " узналo расписание на " + call.data + ", наверное это чмо его не записало, в прочем, ничё нового =/")
+
 @bot.message_handler(commands=["deletedz"])
 def deletedz_message(message):
     if message.from_user.id == 522487188:
