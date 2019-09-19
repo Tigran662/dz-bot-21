@@ -88,6 +88,11 @@ def send1_message(message):
     if message.from_user.id == 522487188:
         bot.send_message(-1001219015757, message.text[6::])
 
+@bot.message_handler(commands=["sendkl"])
+def send1_message(message):
+    if message.from_user.id == 522487188:
+        bot.send_message(-361703950, message.text[6::])
+
 @bot.message_handler(commands=["set"])
 def set_message(message):
     if message.from_user.id == 522487188:
