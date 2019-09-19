@@ -123,7 +123,13 @@ def rasp_message(message):
             break
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
             
-
+@bot.message_handler(commands=["id"])
+def id_message(message):
+    if message.from_user.id == 522487188:
+        bot.send_message(message.chat.id, message.chat.id)
+    else:
+        bot.send_message(message.chat.id, "Не")
+        
 @bot.message_handler(content_types=["text"])
 def text_message(message):
     bot.send_message(-326941525, "Даунич с именем " + message.from_user.first_name + " написал " + message.text)
