@@ -16,7 +16,7 @@ my_collection2 = my_database2.rasp
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
-    bot.send_message(message.chat.id, "/dz - узнать дз")
+    bot.send_message(message.chat.id, "/dz - узнать дз\n/rasp - показать расписание")
     bot.send_message(-326941525, "Гавночух унитаза по имени " + message.from_user.first_name + " написал " + message.text) 
     
 @bot.message_handler(commands=["newdz"])
