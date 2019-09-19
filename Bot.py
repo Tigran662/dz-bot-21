@@ -17,7 +17,7 @@ my_collection2 = my_database2.rasp
 @bot.message_handler(commands=["start"])
 def start_message(message):
     bot.send_message(message.chat.id, "/dz - узнать дз\n/rasp - показать расписание")
-    bot.send_message(-326941525, "Гавночух унитаза по имени " + message.from_user.first_name + " написал " + message.text) 
+    bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 @bot.message_handler(commands=["newdz"])
 def newdz_message(message):
@@ -51,6 +51,7 @@ def url(message):
         btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=item["date"])
         markup.add(btn_my_site)
     bot.send_message(message.chat.id, "Выберите дату", reply_markup = markup)
+    bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -59,11 +60,13 @@ def callback_inline(call):
         if call.message:
             if call.data == item["date"]:
                 bot.send_message(call.message.chat.id, item["date"] + "\n\n" + item["text"])
+                bot.send_message(-326941525, call.from_user.first_name + ": " + call.data)
     my_cursor = my_collection2.find()
     for item in my_cursor:
         if call.message:
             if call.data == item["idch"]:
                 bot.send_message(call.message.chat.id, "• " + item["ch"] + "\n\n" + item["rasp"])
+                bot.send_message(-326941525, call.from_user.first_name + ": " + call.data)
 
 
 @bot.message_handler(commands=["deletedz"])
@@ -118,6 +121,9 @@ def rasp_message(message):
     for item in my_cursor:
         if item["idch"] == "prosto":
             bot.send_message(message.chat.id, "Выберите день недели\nНа данный момент: " + item["val"], reply_markup = markup2)
+            break
+    bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
+            
 
 @bot.message_handler(content_types=["text"])
 def text_message(message):
