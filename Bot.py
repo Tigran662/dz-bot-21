@@ -131,11 +131,7 @@ def rasp_message(message):
             bot.send_message(message.chat.id, "Выберите день недели\nНа данный момент: " + item["val"], reply_markup = markup2)
             break
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
-            
-@bot.message_handler(commands=["id"])
-def id_message(message):
-        bot.send_message(message.chat.id, message.from_user.id)
-        
+
 @bot.message_handler(content_types=["text"])
 def text_message(message):
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
