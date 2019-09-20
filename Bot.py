@@ -90,8 +90,13 @@ def send1_message(message):
 
 @bot.message_handler(commands=["sendkl"])
 def send1_message(message):
-    if message.from_user.id == 522487188:
-        bot.send_message(-361703950, message.text[8::])
+    e = [408011007, 522487188, 482625846]
+    if message.text[8::] != "":
+        if message.from_user.id in e:
+            bot.send_message(-361703950, message.text[8::])
+            bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
+    else:
+        bot.send_message(message.chat.id, "Введите текст")
 
 @bot.message_handler(commands=["set"])
 def set_message(message):
@@ -130,13 +135,10 @@ def rasp_message(message):
             
 @bot.message_handler(commands=["id"])
 def id_message(message):
-    if message.from_user.id == 522487188:
-        bot.send_message(message.chat.id, message.chat.id)
-    else:
-        bot.send_message(message.chat.id, "Не")
+        bot.send_message(message.chat.id, message.from_user.id)
         
 @bot.message_handler(content_types=["text"])
 def text_message(message):
-    bot.send_message(-326941525, "Даунич с именем " + message.from_user.first_name + " написал " + message.text)
+    bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 bot.polling()
