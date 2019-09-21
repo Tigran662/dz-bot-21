@@ -59,14 +59,19 @@ def callback_inline(call):
     for item in my_cursor:
         if call.message:
             if call.data == item["date"]:
-                bot.send_message(call.message.chat.id, item["date"] + "\n\n" + item["text"])
+                try:
+                    bot.send_message(call.from_user.id, item["date"] + "\n\n" + item["text"])
+                except:
+                    pass
     my_cursor = my_collection2.find()
     for item in my_cursor:
         if call.message:
             if call.data == item["idch"]:
-                bot.send_message(call.message.chat.id, "• " + item["ch"] + "\n\n" + item["rasp"])
+                try:
+                    bot.send_message(call.from_user.id, "• " + item["ch"] + "\n\n" + item["rasp"])
+                except:
+                    pass
     bot.send_message(-326941525, call.from_user.first_name + ": " + call.data)
-
 
 @bot.message_handler(commands=["deletedz"])
 def deletedz_message(message):
