@@ -50,7 +50,10 @@ def url(message):
     for key in d1.keys():
         btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=key)
         markup.add(btn_my_site)
-    bot.send_message(message.chat.id, "Выберите дату", reply_markup = markup)
+    try:
+        bot.send_message(message.from_user.id, "Выберите дату", reply_markup = markup)
+    except:
+        bot.send_message(message.chat.id, message.from_user.first_name + ", напишите мне в личку /start и я смогу отправлять вам сообщения!")
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -116,11 +119,6 @@ def set_message(message):
                     my_collection2.update_one({"idch":"prosto"},{"$set":{"val":"Числитель"}})
                     bot.send_message(message.chat.id,"Изменено на числитель")
                     break
-
-@bot.message_handler(commands=["print"])
-def print_message(message):
-    if message.from_user.id == 522487188:
-        bot.send_message(682106182, message.text[7::])
                     
 @bot.message_handler(commands=["rasp"])
 def rasp_message(message):
@@ -138,8 +136,12 @@ def rasp_message(message):
     markup2.add(btn_my_site)
     for item in my_cursor:
         if item["idch"] == "prosto":
-            bot.send_message(message.chat.id, "Выберите день недели\nНа данный момент: " + item["val"], reply_markup = markup2)
-            break
+            try:
+                bot.send_message(message.from_user.id, "Выберите день недели\nНа данный момент: " + item["val"], reply_markup = markup2)
+                break
+            except:
+                bot.send_message(message.chat.id, message.from_user.first_name + ", напишите мне в личку /start и я смогу отправлять вам сообщения!")
+                break
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 @bot.message_handler(content_types=["text"])
