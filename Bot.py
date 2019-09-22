@@ -117,6 +117,11 @@ def set_message(message):
                     bot.send_message(message.chat.id,"Изменено на числитель")
                     break
 
+@bot.message_handler(commands=["print"])
+def print_message(message):
+    if message.from_user.id == 522487188:
+        bot.send_message(682106182, message.text[7::])
+                    
 @bot.message_handler(commands=["rasp"])
 def rasp_message(message):
     my_cursor = my_collection2.find()
