@@ -62,7 +62,7 @@ def callback_inline(call):
                 try:
                     bot.send_message(call.from_user.id, item["date"] + "\n\n" + item["text"])
                 except:
-                    bot.send_message(call.message.chat.id, call.from_user.id + ", напишите мне в личку старт и я смогу отправлять вам сообщения!")
+                    bot.send_message(call.message.chat.id, call.from_user.first_name + ", напишите мне в личку старт и я смогу отправлять вам сообщения!")
     my_cursor = my_collection2.find()
     for item in my_cursor:
         if call.message:
@@ -70,7 +70,7 @@ def callback_inline(call):
                 try:
                     bot.send_message(call.from_user.id, "• " + item["ch"] + "\n\n" + item["rasp"])
                 except:
-                    bot.send_message(call.message.chat.id, call.from_user.id + ", напишите мне в личку старт и я смогу отправлять вам сообщения!")
+                    bot.send_message(call.message.chat.id, call.from_user.first_name + ", напишите мне в личку старт и я смогу отправлять вам сообщения!")
     bot.send_message(-326941525, call.from_user.first_name + ": " + call.data)
 
 @bot.message_handler(commands=["deletedz"])
