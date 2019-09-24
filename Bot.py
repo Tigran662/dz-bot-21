@@ -52,7 +52,7 @@ def url(message):
         btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=key)
         markup.add(btn_my_site)
     try:
-        bot.send_message(message.from_user.id, "Выберите дату\nТекущее время: " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), reply_markup = markup)
+        bot.send_message(message.from_user.id, "Выберите дату\nТекущая дата: " + datetime.datetime.now().strftime('%Y-%m-%d'), reply_markup = markup)
     except:
         bot.send_message(message.chat.id, message.from_user.first_name + ", напишите мне в личку /start и я смогу отправлять вам сообщения!")
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
