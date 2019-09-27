@@ -126,14 +126,17 @@ def deletedz_message(message):
 
 @bot.message_handler(commands=["stat"])
 def stat_message(message):
-    my_cursor2 = my_collection3.find()
-    for item in my_cursor2:
-        if item["id"] == str(message.from_user.id):
-            bot.send_message(message.from_user.id, "Понедельник: " + str(item["Понедельник: "]) + "\n" + "Вторник: " + str(item["Вторник: "]) + "\n" + "Среда: " + str(item["Среда: "]) + "\n" + "Четверг: " + str(item["Четверг: "]) + "\n" + "Пятница: " + str(item["Пятница: "]))
-            break
-    else:
-        my_collection3.insert_one({"id": str(message.from_user.id), "Понедельник: ": 0, "Вторник: ": 0, "Среда: ": 0, "Четверг: ": 0, "Пятница: ": 0})
-        bot.send_message(message.from_user.id, "Понедельник: 0\nВторник: 0\nСреда: 0\nЧетверг: 0\nПятница: 0")
+    try:
+        my_cursor2 = my_collection3.find()
+        for item in my_cursor2:
+            if item["id"] == str(message.from_user.id):
+                bot.send_message(message.from_user.id, "Понедельник: " + str(item["Понедельник: "]) + "\n" + "Вторник: " + str(item["Вторник: "]) + "\n" + "Среда: " + str(item["Среда: "]) + "\n" + "Четверг: " + str(item["Четверг: "]) + "\n" + "Пятница: " + str(item["Пятница: "]))
+                break
+        else:
+            my_collection3.insert_one({"id": str(message.from_user.id), "Понедельник: ": 0, "Вторник: ": 0, "Среда: ": 0, "Четверг: ": 0, "Пятница: ": 0})
+            bot.send_message(message.from_user.id, "Понедельник: 0\nВторник: 0\nСреда: 0\nЧетверг: 0\nПятница: 0")
+    except:
+        bot.send_message(message.chat.id, "Напишите мне в личку /start. После этого я смогу вам отправлять сообщения")
     bot.send_message(-326941525, message.from_user.first_name + ": " + message.text)
 
 @bot.message_handler(commands=["bug"])
