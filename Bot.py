@@ -50,7 +50,7 @@ def url(message):
     markup = types.InlineKeyboardMarkup()
     a = dict()
     for item in my_cursor:
-        a.update({item["date"].split()[1]:item["text"]})
+        a.update({item["date"]:item["text"]})
     d1 = dict(sorted(a.items(), key = lambda x:x[0]))
     for key in d1.keys():
         btn_my_site=types.InlineKeyboardButton(text=str(key),callback_data=key)
