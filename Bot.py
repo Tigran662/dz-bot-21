@@ -32,7 +32,7 @@ def newdz_message(message):
             text = " ".join(a[3:])
             my_cursor = my_collection.find()
             for item in my_cursor:
-                if item["date"] == date:
+                if item["date"] == dnd + " " + date:
                     my_collection.update_one({"text":item["text"]},{"$set":{"text":item["text"]+"\n"+"• " + text + "\n"}})
                     bot.send_message(message.chat.id, "Дз обновлено")
                     break
